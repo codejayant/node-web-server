@@ -7,18 +7,24 @@ hbs.registerPartials(__dirname + '/views/partials')  // to register usage of par
 app.set('view engine', 'hbs') // to use handlebars as view engine
 app.use(express.static(__dirname + '/public'))
 
+hbs.registerHelper('getCurrentYear', () => {
+  return new Date().getFullYear()
+})
+
+hbs.registerHelper('screamIt', (text) => {
+  return text.toUpperCase()
+})
+
 app.get('/', (req, res) => {
   res.render('home.hbs', {
     pageTitle: 'Home Page',
-    currentYear: new Date().getFullYear(),
     welcomeMessage: 'Welcome to Home Page'
   })
 })
 
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
-    pageTitle: 'About Page',
-    currentYear: new Date().getFullYear()
+    pageTitle: 'About Page'
   })
 })
 
